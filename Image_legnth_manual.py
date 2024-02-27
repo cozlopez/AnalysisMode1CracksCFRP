@@ -19,7 +19,7 @@ def calculate_distance(image_width, scale_factor, event):
     distances.append(distance)
 
 
-def display_image(image_path):
+def display_image(image_path, scale_factor, image_width):
     # Create a Tkinter window
     root = tk.Tk()
 
@@ -42,12 +42,4 @@ def display_image(image_path):
     # Run the Tkinter event loop
     root.mainloop()
 
-# Example usage
-image_width = 1000  # Width of the image in pixels
-scale_factor = 0.5  # Scale factor for the distance calculation
 
-image_path = "Falcon 9.png" # Replace with the actual path to your image
-display_image(image_path)
-
-# Print the distances list
-print("Distances:", distances)
