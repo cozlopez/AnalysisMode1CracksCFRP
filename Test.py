@@ -5,8 +5,10 @@ import sys
 distances = []
 
 # basic program settings
-scrnx = 1800
-scrny = 1000
+infoObject = pg.display.Info()
+scale = 0.75
+scrnx = infoObject.current_w*scale
+scrny = infoObject.current_h*scale
 resolution = (scrnx, scrny)
 windowTitle = "Distance Calculator"
 maxFrameRate = 120
@@ -40,7 +42,8 @@ def display_image(image_path):
         screen.fill((0,0,0))
         screen.blit(image,(0,0))
         (mouseX,mouseY) = pg.mouse.get_pos()
-        pg.draw.line(screen, (255,0,0), (mouseX,0), (mouseX,scrny))
+        if not secondPress:
+            pg.draw.line(screen, (255,0,0), (mouseX,0), (mouseX,scrny))
         if firstPress == True:
             pg.draw.line(screen, (0,255,0), (firstPressX,0), (firstPressX,scrny))
         if secondPress == True:
@@ -59,24 +62,25 @@ def display_image(image_path):
         clock.tick(maxFrameRate)
         for event in pg.event.get():
             if event.type == pg.MOUSEBUTTONDOWN:
-                if firstPress == False:
-                    firstPress = True
-                    firstPressX = mouseX
-                elif firstPress == True and secondPress == False:
-                    secondPress = True
-                    secondPressX = mouseX
-                elif firstPress == True and secondPress == True and thirdPress == False:
-                    thirdPress = True
-                    diff = secondPressX - firstPressX
-                    diffOG = diff*(imgW/scrnx)
-                elif firstPress == True and secondPress == True and thirdPress == True:
-                    fourthPress = True
-                    return diffOG
+                if event.button == 1:
+                    if firstPress == False:
+                        firstPress = True
+                        firstPressX = mouseX
+                    elif firstPress == True and secondPress == False:
+                        secondPress = True
+                        secondPressX = mouseX
+                    elif firstPress == True and secondPress == True and thirdPress == False:
+                        thirdPress = True
+                        diff = secondPressX - firstPressX
+                        diffOG = diff*(imgW/scrnx)
+                    elif firstPress == True and secondPress == True and thirdPress == True:
+                        fourthPress = True
+                        return diffOG
             if event.type == pg.QUIT: # Checks if the user has pressed the close (X) button or pressed alt + F4
                 sys.exit()
             if event.type == pg.K_ESCAPE:
-                firstPress == False
-                secondPress == False
+                firstPress = False
+                secondPress = False
         pg.event.pump()
 
 #for i in range (2):
