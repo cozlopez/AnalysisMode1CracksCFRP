@@ -2,6 +2,8 @@
 import pygame as pg 
 import sys
 
+distances = []
+
 # basic program settings
 scrnx = 1800
 scrny = 1000
@@ -15,18 +17,23 @@ screen = pg.display.set_mode(resolution)
 pg.display.set_caption(windowTitle)
 clock = pg.time.Clock()
 pg.font.init()
-font1 = pg.font.SysFont('Arial', 40)
+font1 = pg.font.SysFont('Arial', 20)
 
 
 def display_image(image_path):
+    diff = float()
+    diffOG = float()
     image = pg.image.load(image_path)
-    imageScale = image.get_height()/image.get_width()
+    imgH = image.get_height()
+    imgW = image.get_width()
+    imageScale = imgH/imgW
     image = pg.transform.scale(image, (scrnx, scrnx*imageScale))
     firstPress = False
     firstPressX = float()
     secondPress = False
     secondPressX = float()
     thirdPress = False
+    fourthPress = False
     confirmation = font1.render("Press again to confirm, press escape to choose again", True, (255,255,255))
     # Display image
     while True:
@@ -38,7 +45,16 @@ def display_image(image_path):
             pg.draw.line(screen, (0,255,0), (firstPressX,0), (firstPressX,scrny))
         if secondPress == True:
             pg.draw.line(screen, (0,255,0), (secondPressX,0), (secondPressX,scrny))
-            screen.blit(confirmation, (200,500))
+            if thirdPress == False:
+                screen.blit(confirmation, (200,500))
+        if thirdPress == True:
+            dataText = font1.render("The distance on your screen is " + str(diff) + " pixels", True, (255,255,255))
+            dataText2 = font1.render("The distance in the original image is " + str(diffOG) + " pixels", True, (255,255,255))
+            dataText3 = font1.render("The distance in the original image has been saved to the list. Click again to go to the next image or exit.", True, (255,255,255))
+            screen.blit(dataText, (200,600))
+            screen.blit(dataText2, (200,650))
+            screen.blit(dataText3, (200,700))
+            
         pg.display.update()
         clock.tick(maxFrameRate)
         for event in pg.event.get():
@@ -50,7 +66,12 @@ def display_image(image_path):
                     secondPress = True
                     secondPressX = mouseX
                 elif firstPress == True and secondPress == True and thirdPress == False:
-                    thirdPress == True
+                    thirdPress = True
+                    diff = secondPressX - firstPressX
+                    diffOG = diff*(imgW/scrnx)
+                elif firstPress == True and secondPress == True and thirdPress == True:
+                    fourthPress = True
+                    return diffOG
             if event.type == pg.QUIT: # Checks if the user has pressed the close (X) button or pressed alt + F4
                 sys.exit()
             if event.type == pg.K_ESCAPE:
@@ -60,5 +81,3 @@ def display_image(image_path):
 
 #for i in range (2):
 distance = display_image("Test1"+".png")
-image_width = 5852  # Width of the image in pixels
-scale_factor = 0.5  # Scale factor for the distance calculation
