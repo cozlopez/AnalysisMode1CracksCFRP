@@ -1,6 +1,8 @@
 #from Image_legnth_manual import display_image
 import pygame as pg 
 import sys
+import os
+
 
 distances = []
 
@@ -22,7 +24,7 @@ pg.font.init()
 font1 = pg.font.SysFont('Arial', 20)
 
 
-def display_image(image_path):
+def display_image(image_path,scalefactor =2): # TODO: Place real scale factor.
     diff = float()
     diffOG = float()
     image = pg.image.load(image_path)
@@ -51,8 +53,8 @@ def display_image(image_path):
             if thirdPress == False:
                 screen.blit(confirmation, (200,500))
         if thirdPress == True:
-            dataText = font1.render("The distance on your screen is " + str(diff) + " pixels", True, (255,255,255))
-            dataText2 = font1.render("The distance in the original image is " + str(diffOG) + " pixels", True, (255,255,255))
+            dataText = font1.render("The distance on your screen is " + str(abs(diff)) + " pixels", True, (255,255,255))
+            dataText2 = font1.render("The distance in the original image is " + str(abs(diffOG)) + " pixels", True, (255,255,255))
             dataText3 = font1.render("The distance in the original image has been saved to the list. Click again to go to the next image or exit.", True, (255,255,255))
             screen.blit(dataText, (200,600))
             screen.blit(dataText2, (200,650))
@@ -82,6 +84,15 @@ def display_image(image_path):
                 firstPress = False
                 secondPress = False
         pg.event.pump()
+        
 
-#for i in range (2):
-distance = display_image("Test1"+".png")
+base_path = os.getcwd()  # Get the current working directory
+print(base_path)
+image_dir = "Images"  # Relative path to the image directory
+lst = os.listdir(os.path.join(base_path, image_dir))
+number_files = len(lst)
+
+
+for i in range (number_files - 1):
+    distance = display_image(str(base_path)+"/Images/1 ("+str(i+1)+").jpg")
+
