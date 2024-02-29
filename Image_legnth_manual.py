@@ -1,6 +1,8 @@
 import math
 from PIL import Image, ImageTk
 import tkinter as tk
+import pygame as pg
+from Test import *
 
 # Define an empty list to store the distances
 distances = []
@@ -18,7 +20,7 @@ def calculate_distance(image_width, scale_factor, event):
     # Append the distance to the distances list
     distances.append(distance)
 
-
+'''
 def display_image(image_path, scale_factor, image_width):
     # Create a Tkinter window
     root = tk.Tk()
@@ -41,5 +43,14 @@ def display_image(image_path, scale_factor, image_width):
 
     # Run the Tkinter event loop
     root.mainloop()
+'''
+def display_image(image_path, scale_factor, image_width):
+    # Display image
+    while True:
+        screen.blit(image_path,(0,0))
+        for event in pg.event.get():
+            if event.type == pg.QUIT: # Checks if the user has pressed the close (X) button or pressed alt + F4
+                sys.exit()
+
 
 
