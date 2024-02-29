@@ -55,10 +55,12 @@ def display_image(image_path,scalefactor =2): # TODO: Place real scale factor.
         if thirdPress == True:
             dataText = font1.render("The distance on your screen is " + str(abs(diff)) + " pixels", True, (255,255,255))
             dataText2 = font1.render("The distance in the original image is " + str(abs(diffOG)) + " pixels", True, (255,255,255))
-            dataText3 = font1.render("The distance in the original image has been saved to the list. Click again to go to the next image or exit.", True, (255,255,255))
+            dataText3 = font1.render("The distance in real life is "+ str(diffOG*scalefactor) + "mm",True, (255,255,255))
+            dataText4 = font1.render("The distance in mm has been saved to the list. Click again to go to the next image or exit.", True, (255,255,255))
             screen.blit(dataText, (200,600))
             screen.blit(dataText2, (200,650))
             screen.blit(dataText3, (200,700))
+            screen.blit(dataText4,(200,750))
             
         pg.display.update()
         clock.tick(maxFrameRate)
