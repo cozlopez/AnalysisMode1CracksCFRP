@@ -7,8 +7,8 @@ import os
 distances = []
 
 # basic program settings
-scrnx = 1800
-scrny = 1000
+scrnx = 1470
+scrny = 956
 resolution = (scrnx, scrny)
 windowTitle = "Distance Calculator"
 maxFrameRate = 120
