@@ -4,11 +4,11 @@ import sys
 import os
 
 
-distances = []
-
+distances_list = []
+pg.init()
 # basic program settings
 infoObject = pg.display.Info()
-scale = 0.75
+scale = 0.85
 scrnx = infoObject.current_w*scale
 scrny = infoObject.current_h*scale
 resolution = (scrnx, scrny)
@@ -16,7 +16,7 @@ windowTitle = "Distance Calculator"
 maxFrameRate = 120
 
 # initialise Pygame
-pg.init()
+
 screen = pg.display.set_mode(resolution)
 pg.display.set_caption(windowTitle)
 clock = pg.time.Clock()
