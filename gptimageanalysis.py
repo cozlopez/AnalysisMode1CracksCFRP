@@ -38,7 +38,7 @@ def calculate_crack_length(image_path):
     return crack_length_mm
 
 # Path to the image
-image_path = '/mnt/data/1 (90).jpg'
+image_path = '/Test1.png'
 
 # Calculate the crack length
 crack_length = calculate_crack_length(image_path)
