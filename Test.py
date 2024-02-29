@@ -18,7 +18,7 @@ pg.font.init()
 font1 = pg.font.SysFont('Arial', 40)
 
 
-def display_image(image_path, scale_factor, image_width):
+def display_image(image_path):
     image = pg.image.load(image_path)
     imageScale = image.get_height()/image.get_width()
     image = pg.transform.scale(image, (scrnx, scrnx*imageScale))
@@ -38,7 +38,7 @@ def display_image(image_path, scale_factor, image_width):
             pg.draw.line(screen, (0,255,0), (firstPressX,0), (firstPressX,scrny))
         if secondPress == True:
             pg.draw.line(screen, (0,255,0), (secondPressX,0), (secondPressX,scrny))
-            screen.blit(confirmation, (100,900))
+            screen.blit(confirmation, (200,500))
         pg.display.update()
         clock.tick(maxFrameRate)
         for event in pg.event.get():
@@ -53,11 +53,12 @@ def display_image(image_path, scale_factor, image_width):
                     thirdPress == True
             if event.type == pg.QUIT: # Checks if the user has pressed the close (X) button or pressed alt + F4
                 sys.exit()
+            if event.type == pg.K_ESCAPE:
+                firstPress == False
+                secondPress == False
         pg.event.pump()
 
 #for i in range (2):
-image_width = 5852  # Width of the image in pixels
-scale_factor = 0.5  # Scale factor for the distance calculation
-distance = display_image("Test1"+".png", scale_factor, image_width)
+distance = display_image("Test1"+".png")
 image_width = 5852  # Width of the image in pixels
 scale_factor = 0.5  # Scale factor for the distance calculation
