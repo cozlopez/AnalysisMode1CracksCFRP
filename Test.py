@@ -8,7 +8,7 @@ distances_list = []
 pg.init()
 # basic program settings
 infoObject = pg.display.Info()
-scale = 0.85
+scale = 1
 scrnx = infoObject.current_w*scale
 scrny = infoObject.current_h*scale
 resolution = (scrnx, scrny)
@@ -75,16 +75,17 @@ def display_image(image_path,scalefactor =2): # TODO: Place real scale factor.
                         secondPressX = mouseX
                     elif firstPress == True and secondPress == True and thirdPress == False:
                         thirdPress = True
-                        diff = secondPressX - firstPressX
+                        diff = abs(secondPressX - firstPressX)
                         diffOG = diff*(imgW/scrnx)
                     elif firstPress == True and secondPress == True and thirdPress == True:
                         fourthPress = True
                         return diffOG
             if event.type == pg.QUIT: # Checks if the user has pressed the close (X) button or pressed alt + F4
                 sys.exit()
-            if event.type == pg.K_ESCAPE:
-                firstPress = False
-                secondPress = False
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_ESCAPE:
+                    firstPress = False
+                    secondPress = False
         pg.event.pump()
         
 
