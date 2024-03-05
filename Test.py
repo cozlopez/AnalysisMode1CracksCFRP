@@ -2,7 +2,7 @@
 import pygame as pg 
 import sys
 import os
-
+import csv
 
 distances_list = []
 pg.init()
@@ -95,7 +95,22 @@ image_dir = "Images"  # Relative path to the image directory
 lst = os.listdir(os.path.join(base_path, image_dir))
 number_files = len(lst)
 
+# Create a csv file to store the measurements
+with open('measurements.csv', 'w') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Image Number", "Distance in mm"])
+
 
 for i in range (number_files - 1):
     distance = display_image(str(base_path)+"/Images/1 ("+str(i+1)+").jpg")
+    with open('measurements.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["1({}).jpg".format(str(i+1)), distance])
+
+
+        
+        
+    
+
+
 
