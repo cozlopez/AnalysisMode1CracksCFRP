@@ -72,7 +72,7 @@ distances_list = []
 pg.init()
 # basic program settings
 infoObject = pg.display.Info()
-scale = 1
+scale = 0.95
 scrnx = infoObject.current_w*scale
 scrny = infoObject.current_h*scale
 resolution = (scrnx, scrny)
@@ -148,7 +148,7 @@ def display_image(image_path,scalefactor): # TODO: Place real scale factor.
                         diffOG = diff*(imgW/scrnx)
                     elif firstPress == True and secondPress == True and thirdPress == True:
                         fourthPress = True
-                        return diffOG*scalefactor
+                        return diffOG
             if event.type == pg.QUIT: # Checks if the user has pressed the close (X) button or pressed alt + F4
                 sys.exit()
             if event.type == pg.KEYDOWN:
@@ -180,7 +180,7 @@ file_name = "measurements_images_"+str(image_dir)+".csv"
 # Create a csv file to store the measurements
 with open(file_name, 'w') as file:
     writer = csv.writer(file)
-    writer.writerow(["Image Number", "Distance in mm"])
+    writer.writerow(["Image Number", "Distance in mm", "Distance in pixels"])
 
 
 for i in range (number_files - 1):
@@ -188,7 +188,7 @@ for i in range (number_files - 1):
     
     with open(file_name, 'a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["1({}).jpg".format(str(i+1)), distance])
+        writer.writerow(["1({}).jpg".format(str(i+1)),  distance*scalefactor,distance])
 
 
         
