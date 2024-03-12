@@ -53,4 +53,3 @@ def display_image(image_path, scale_factor, image_width):
                 sys.exit()
 
 
-
