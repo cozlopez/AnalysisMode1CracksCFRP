@@ -1,5 +1,9 @@
-import tkinter as tk
+import pygame as pg 
+import sys
 import os
+import csv
+import tkinter as tk
+
 
 # Create the root window
 root = tk.Tk()
@@ -62,11 +66,7 @@ image_dir = selected_folder.get()  # Relative path to the image
 
 
 #from Image_legnth_manual import display_image
-import pygame as pg 
-import sys
-import os
-import csv
-import tkinter as tk
+
 
 distances_list = []
 pg.init()
@@ -90,7 +90,10 @@ font1 = pg.font.SysFont('Arial', 20)
 
 
 
-def display_image(image_path,scalefactor =2): # TODO: Place real scale factor.
+
+
+
+def display_image(image_path,scalefactor): # TODO: Place real scale factor.
     diff = float()
     diffOG = float()
     image = pg.image.load(image_path)
@@ -145,7 +148,7 @@ def display_image(image_path,scalefactor =2): # TODO: Place real scale factor.
                         diffOG = diff*(imgW/scrnx)
                     elif firstPress == True and secondPress == True and thirdPress == True:
                         fourthPress = True
-                        return diffOG
+                        return diffOG*scalefactor
             if event.type == pg.QUIT: # Checks if the user has pressed the close (X) button or pressed alt + F4
                 sys.exit()
             if event.type == pg.KEYDOWN:
@@ -156,29 +159,34 @@ def display_image(image_path,scalefactor =2): # TODO: Place real scale factor.
         
 
 
-lst = os.listdir(os.path.join(os.getcwd(), image_dir))
-
-print(os.path.join(os.getcwd(), image_dir))
+lst = os.listdir(os.path.join(os.getcwd(),"Images", image_dir))
+base_path = os.path.join(os.getcwd(),"Images", image_dir)
+print(os.path.join(os.getcwd(),"Images", image_dir))
 number_files = len(lst)
 
 
 
 
+if image_dir == "01" or "04":
+    scalefactor = 0.03054367746
+elif image_dir == "02":
+    scalefactor = 0.03121098627
+elif image_dir == "03":
+    scalefactor = 0.03846153846
 
 
 
-
-
-
+file_name = "measurements_images_"+str(image_dir)+".csv"
 # Create a csv file to store the measurements
-with open('measurements.csv', 'w') as file:
+with open(file_name, 'w') as file:
     writer = csv.writer(file)
     writer.writerow(["Image Number", "Distance in mm"])
 
 
 for i in range (number_files - 1):
-    distance = display_image(str(base_path)+"/Images/1 ("+str(i+1)+").jpg")
-    with open('measurements.csv', 'a', newline='') as file:
+    distance = display_image(str(base_path)+"/"+ str(int(image_dir))+" ("+str(i+1)+").jpg",scalefactor)
+    
+    with open(file_name, 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["1({}).jpg".format(str(i+1)), distance])
 
