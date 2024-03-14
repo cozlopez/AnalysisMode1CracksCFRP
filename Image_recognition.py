@@ -3,6 +3,7 @@ import sys
 import os
 import csv
 import tkinter as tk
+from resizing import resize
 
 
 # Create the root window
@@ -96,7 +97,13 @@ font1 = pg.font.SysFont('Arial', 20)
 def display_image(image_path,scalefactor): # TODO: Place real scale factor.
     diff = float()
     diffOG = float()
-    image = pg.image.load(image_path)
+    # image = pg.image.load(image_path)
+    try:
+        image = pg.image(resize(image_path,5))
+
+    except:
+        image = pg.image(resize(image_path, 3))
+
     imgH = image.get_height()
     imgW = image.get_width()
     imageScale = imgH/imgW
