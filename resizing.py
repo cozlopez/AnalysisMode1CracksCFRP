@@ -92,7 +92,8 @@ def resize(file, min_crack_length):
         #print(y_sample_start_2, y_sample_end_2, end_sample_triguered_2)
         crack_centered_image = rgb_image_transformed.crop((0, y_sample_start_2 - 60, 700, y_sample_end_2 + 60))
         #crack_centered_image.show()
-        return crack_centered_image 
+        crack_centered_image.save("Zoomed_images")
+        #return crack_centered_image 
         
 
     else:
@@ -133,7 +134,7 @@ def resize(file, min_crack_length):
         
         crack_centered_image = rgb_image.crop((0, y_sample_start_2 - 60, 700, y_sample_end_2 + 60))
         #crack_centered_image.show()
-        crack_centered_image.save()
-        return crack_centered_image
+        crack_centered_image.save("Zoomed_images")
+        #return crack_centered_image
 
 #resize("Crack5.png")
