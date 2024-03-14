@@ -97,12 +97,8 @@ font1 = pg.font.SysFont('Arial', 20)
 def display_image(image_path,scalefactor): # TODO: Place real scale factor.
     diff = float()
     diffOG = float()
-    # image = pg.image.load(image_path)
-    try:
-        image = pg.image(resize(image_path,5))
+    image = pg.image.load(image_path)
 
-    except:
-        image = pg.image(resize(image_path, 3))
 
     imgH = image.get_height()
     imgW = image.get_width()
