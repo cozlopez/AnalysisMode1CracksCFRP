@@ -182,15 +182,18 @@ with open(file_name, 'w') as file:
     writer = csv.writer(file)
     writer.writerow(["Image Number", "Distance in mm", "Distance in pixels"])
 
-
-for i in range (number_files - 1):
-    distance = display_image(str(base_path)+"/"+ str(int(image_dir))+" ("+str(i+1)+").jpg",scalefactor)
-    
+for i in range(number_files - 1):
+    image_path = str(base_path) + "/" + str(int(image_dir)) + " (" + str(i + 1) + ").jpg"
+    if not os.path.exists(image_path):
+        print("File not found:", image_path)
+        continue
+    distance = display_image(image_path, scalefactor)
+            
     with open(file_name, 'a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["1({}).jpg".format(str(i+1)),  distance*scalefactor,distance])
+        writer.writerow(["1({}).jpg".format(str(i + 1)), distance * scalefactor, distance])
 
-
+        
         
         
     
