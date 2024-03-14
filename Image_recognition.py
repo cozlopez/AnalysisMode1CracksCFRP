@@ -94,10 +94,14 @@ font1 = pg.font.SysFont('Arial', 20)
 
 
 
-def display_image(image_path,scalefactor): # TODO: Place real scale factor.
+def display_image(image_path,scalefactor,iteration): # TODO: Place real scale factor.
     diff = float()
     diffOG = float()
     image = pg.image.load(image_path)
+    for i in range(number_files - 1):
+        image_path = str(base_path) + "/" + "Zoomed_images/" + " (" + str(i + 1) + ").jpg"
+    
+
     imgH = image.get_height()
     imgW = image.get_width()
     imageScale = imgH/imgW
@@ -188,7 +192,7 @@ for i in range(number_files - 1):
     if not os.path.exists(image_path):
         print("File not found:", image_path)
         continue
-    distance = display_image(image_path, scalefactor)
+    distance = display_image(image_path, scalefactor,i,image_dir)
             
     with open(file_name, 'a', newline='') as file:
         writer = csv.writer(file)

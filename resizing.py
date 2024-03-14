@@ -3,9 +3,9 @@
 #from PIL import Image
 #from PIL import ImageColor
 #import numpy as np
+import os
 
-
-def resize(file, min_crack_length):
+def resize(min_crack_length, base_path= "/Users/carlosorcezuazu/Documents/VSCode/AnalysisMode1CracksCFRP/",file ="/Users/carlosorcezuazu/Documents/VSCode/AnalysisMode1CracksCFRP/Images/01/1 (180).jpg"):
     from PIL import Image
     from PIL import ImageColor
     import numpy as np
@@ -92,7 +92,7 @@ def resize(file, min_crack_length):
         #print(y_sample_start_2, y_sample_end_2, end_sample_triguered_2)
         crack_centered_image = rgb_image_transformed.crop((0, y_sample_start_2 - 60, 700, y_sample_end_2 + 60))
         #crack_centered_image.show()
-        crack_centered_image.save("Zoomed_images")
+        crack_centered_image.save(base_path+"Zoomed_images")
         #return crack_centered_image 
         
 
@@ -134,7 +134,11 @@ def resize(file, min_crack_length):
         
         crack_centered_image = rgb_image.crop((0, y_sample_start_2 - 60, 700, y_sample_end_2 + 60))
         #crack_centered_image.show()
-        crack_centered_image.save("Zoomed_images")
+
+        crack_centered_image.save(base_path+"Zoomed_images")
         #return crack_centered_image
+        return "hello world"
 
 #resize("Crack5.png")
+        
+r = resize(5)
