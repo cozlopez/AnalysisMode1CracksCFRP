@@ -98,8 +98,6 @@ def display_image(image_path,scalefactor): # TODO: Place real scale factor.
     diff = float()
     diffOG = float()
     image = pg.image.load(image_path)
-
-
     imgH = image.get_height()
     imgW = image.get_width()
     imageScale = imgH/imgW
