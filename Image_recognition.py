@@ -6,6 +6,30 @@ import tkinter as tk
 from resizing import resize
 
 
+
+
+
+
+
+
+
+
+def delete_files_in_directory(directory_path):
+   try:
+     files = os.listdir(directory_path)
+     for file in files:
+       file_path = os.path.join(directory_path, file)
+       if os.path.isfile(file_path):
+         os.remove(file_path)
+     print("All files deleted successfully.")
+   except OSError:
+     print("Error occurred while deleting files.")
+
+
+
+
+
+
 # Create the root window
 root = tk.Tk()
 
@@ -98,9 +122,7 @@ def display_image(image_path,scalefactor,iteration): # TODO: Place real scale fa
     diff = float()
     diffOG = float()
     image = pg.image.load(image_path)
-    for i in range(number_files - 1):
-        image_path = str(base_path) + "/" + "Zoomed_images/" + " (" + str(i + 1) + ").jpg"
-    
+
 
     imgH = image.get_height()
     imgW = image.get_width()
@@ -171,29 +193,57 @@ number_files = len(lst)
 
 
 
-
-if image_dir == "01" or "04":
+print(selected_folder.get())
+if selected_folder.get() == "01" or selected_folder.get() == "04":
     scalefactor = 0.03054367746
-elif image_dir == "02":
-    scalefactor = 0.03121098627
-elif image_dir == "03":
+elif selected_folder.get() == "02":
+    scalefactor = 0.03381355932
+elif selected_folder.get() == "03":
     scalefactor = 0.03846153846
 
 
 
 file_name = "measurements_images_"+str(image_dir)+".csv"
+
+
+
+
+
+
 # Create a csv file to store the measurements
 with open(file_name, 'w') as file:
     writer = csv.writer(file)
     writer.writerow(["Image Number", "Distance in mm", "Distance in pixels"])
 
-for i in range(number_files - 1):
+
+delete_files_in_directory(os.getcwd() + "/Zoomed_images")
+
+for i in range(number_files-1):
     image_path = str(base_path) + "/" + str(int(image_dir)) + " (" + str(i + 1) + ").jpg"
+    image_path_resize= os.getcwd() + "/" + "Zoomed_images"
     if not os.path.exists(image_path):
         print("File not found:", image_path)
+
+    else:
+        
+        #print(image_path_resize)
+        try:
+            resize(5,image_path_resize,image_path,image_path_resize)  
+        except:
+            resize(2,image_path_resize,image_path,image_path_resize)
+    
+        
+
+
+for i in range(number_files - 1):
+    image_path_2= os.getcwd() + "/" + "Zoomed_images"+"/" + str(int(image_dir)) + " (" + str(i + 1) + ").jpg"
+
+    if not os.path.exists(image_path_2):
+        print("File not found:", image_path_2)
         continue
-    distance = display_image(image_path, scalefactor,i,image_dir)
-            
+    distance = display_image(image_path_2, scalefactor,i)
+    print(scalefactor)
+    print("Distance:", distance)
     with open(file_name, 'a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["1({}).jpg".format(str(i + 1)), distance * scalefactor, distance])

@@ -5,9 +5,10 @@
 #import numpy as np
 import os
 
-def resize(min_crack_length, base_path= "/Users/fedorselivanov/Documents/AnalysisMode1CracksCFRP/Zoomed_images",file ="/Users/fedorselivanov/Documents/AnalysisMode1CracksCFRP/Images/03/3 (1).jpg"):
+def resize(min_crack_length, base_path,file,special_path):
     from PIL import Image
     from PIL import ImageColor
+
     import numpy as np
 
     #Provide image file path and extract the variable "crack_centered_image"
@@ -97,7 +98,7 @@ def resize(min_crack_length, base_path= "/Users/fedorselivanov/Documents/Analysi
 
         filename = os.path.basename(file)
         filename_without_extension, extension = os.path.splitext(filename)
-        output_filename = f"{filename_without_extension}_resized{extension}"
+        output_filename = f"{filename_without_extension}{extension}"
         output_path = os.path.join(base_path, output_filename)
         crack_centered_image.save(output_path)
         
@@ -147,10 +148,9 @@ def resize(min_crack_length, base_path= "/Users/fedorselivanov/Documents/Analysi
 
         filename = os.path.basename(file)
         filename_without_extension, extension = os.path.splitext(filename)
-        output_filename = f"{filename_without_extension}_resized{extension}"
-        output_path = os.path.join(base_path, output_filename)
+        output_filename = f"{filename_without_extension}{extension}"
+        output_path = os.path.join(special_path, output_filename)
         crack_centered_image.save(output_path)
 
 #resize("Crack5.png")
         
-r = resize(5)
