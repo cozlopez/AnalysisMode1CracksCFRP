@@ -12,22 +12,24 @@ import scipy as sp
 
 for i in range(4):
     df = pd.read_csv('Sample'+str(i+1)+'.csv')
-    slope, intercept, r, p, se = sp.stats.linregress(np.array(df['C1/3']), np.array(df['a_mm']))
-    linear_regression = slope * df['C1/3'] + intercept
+    slope, intercept, r, p, se = sp.stats.linregress(np.array(df['a_mm']), np.array(df['C1/3']))
+    linear_regression = slope * df['a_mm'] + intercept
     print(slope,intercept)
-
+    print(linear_regression)
     plt.figure(figsize=(10,6))
 
     # Plot the two columns
-    plt.scatter(df['C1/3'], df['a_mm'], label='Data')
+    plt.scatter(df['a_mm'], df['C1/3'], label='Data')
+    plt.xlim(np.min(df['a_mm'])-1, np.max(df['a_mm'])+1)
+    plt.ylim(np.min(df['C1/3'])-1e-5, np.max(df['C1/3'])+1e-5)
 
     # Plot the linear regression line
-    plt.plot(df['C1/3'], linear_regression, color='red', label='Linear Regression')
+    plt.plot(df['a_mm'], np.array(linear_regression), color='red', label='Linear Regression')
 
     # Add labels and title to the plot
-    plt.xlabel('$ C^{\\frac{1}{3}} $')
-    plt.ylabel('$a_{mm}$ ')
-    plt.title('Test'+str(i) + '+ Linear Regression Line')
+    plt.ylabel('$ C^{\\frac{1}{3}} $')
+    plt.xlabel('$a_{mm}$ ')
+    plt.title('Test'+str(i+1) + '+ Linear Regression Line')
 
     # Add a legend to the plot
     plt.legend()
