@@ -206,7 +206,7 @@ elif selected_folder.get() == "03":
 
 
 
-file_name = "measurements_images_"+str(image_dir)+'_'+str(name)+'_'+ 'run:' +str(num_samples)+".csv"
+file_name = "measurements_images_"+str(image_dir)+'_'+str(name)+'_'+ 'iteration_' +str(num_samples)+".csv"
 
 
 
