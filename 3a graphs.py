@@ -10,7 +10,7 @@ import scipy as sp
 
 # Calculate the linear regression line
 
-for i in range(3):
+for i in range(4):
     df = pd.read_csv('Sample'+str(i+1)+'.csv')
     slope, intercept, r, p, se = sp.stats.linregress(np.array(df['C1/3']), np.array(df['a_mm']))
     linear_regression = slope * df['C1/3'] + intercept
@@ -19,7 +19,7 @@ for i in range(3):
     plt.figure(figsize=(10,6))
 
     # Plot the two columns
-    plt.plot(df['C1/3'], df['a_mm'], label='Data')
+    plt.scatter(df['C1/3'], df['a_mm'], label='Data')
 
     # Plot the linear regression line
     plt.plot(df['C1/3'], linear_regression, color='red', label='Linear Regression')
@@ -27,7 +27,7 @@ for i in range(3):
     # Add labels and title to the plot
     plt.xlabel('$ C^{\\frac{1}{3}} $')
     plt.ylabel('$a_{mm}$ ')
-    plt.title('Test 1 + Linear Regression Line')
+    plt.title('Test'+str(i) + '+ Linear Regression Line')
 
     # Add a legend to the plot
     plt.legend()
