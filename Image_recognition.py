@@ -4,14 +4,17 @@ import os
 import csv
 import tkinter as tk
 from resizing import resize
+from tkinter import simpledialog
 
 
+root = tk.Tk()
+#root.withdraw()  # Hide the main window
 
+# Ask for user input
+name = simpledialog.askstring("Input", "Please enter your name:", parent=root)
+num_samples = simpledialog.askinteger("Input", "Please enter the number of samples:", parent=root)
 
-
-
-
-
+root.destroy()
 
 
 def delete_files_in_directory(directory_path):
@@ -203,7 +206,7 @@ elif selected_folder.get() == "03":
 
 
 
-file_name = "measurements_images_"+str(image_dir)+".csv"
+file_name = "measurements_images_"+str(image_dir)+'_'+str(name)+'_'+ 'run:' +str(num_samples)+".csv"
 
 
 
