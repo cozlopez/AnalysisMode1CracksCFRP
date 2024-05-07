@@ -11,7 +11,12 @@ def plot_multiple_linear_relations(params_list, x_range=(2, 5),y_range = (0,1.2)
         # Calculate y values using the linear equation y = mx + c
         y_values = m * x_values + c
         # Plot the linear relationship with the specified color
-        plt.plot(x_values, y_values, label='Sample '+ str(i), color=color)
+        if i<6:
+            plt.plot(x_values, y_values, label='Sample '+ str(i), color=color)
+        if i==6:
+            plt.plot(x_values, y_values, label='Hoop method', color=color, linestyle='dashed')
+        if i==7:
+            plt.plot(x_values, y_values, label='Hoop method', color=color, linestyle='dashed')
     
     plt.xlabel('log(Number of Cycles)')
     plt.ylabel('log($a-a_0$)')
@@ -22,5 +27,5 @@ def plot_multiple_linear_relations(params_list, x_range=(2, 5),y_range = (0,1.2)
 
 # Example usage
 # List of tuples containing (m, c, color) values for each linear relationship
-params_list = [(0.13961015, 0.244581091, 'blue'), (0.127710895, 0.361831674, 'red'), (0.150545781, 0.222005088, 'green'), (0.129464013, 0.35345854, 'purple'), (0.139692833, 0.277140293, 'orange')]
+params_list = [(0.13961015, 0.244581091, 'blue'), (0.127710895, 0.361831674, 'red'), (0.150545781, 0.222005088, 'green'), (0.129464013, 0.35345854, 'purple'), (0.139692833, 0.277140293, 'orange'),(0.142851183,0.238651294,"black"),(0.137404734,0.291803337,"cyan")]
 plot_multiple_linear_relations(params_list)
