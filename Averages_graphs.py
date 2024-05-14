@@ -12,18 +12,19 @@ def plot_multiple_linear_relations(params_list, x_range=(2, 5),y_range = (0,1.2)
         y_values = m * x_values + c
         # Plot the linear relationship with the specified color
         if i<6:
-            plt.plot(x_values, y_values, label='Sample '+ str(i), color=color)
+            plt.plot(x_values, y_values, label='User '+ str(i), color=color)
         if i==6:
-            plt.plot(x_values, y_values, label='Hoop method', color=color, linestyle='dashed')
+            plt.plot(x_values, y_values, label='Hop method', color=color, linestyle='dashed')
         if i==7:
-            plt.plot(x_values, y_values, label='Hoop method', color=color, linestyle='dashed')
+            plt.plot(x_values, y_values, label='Manual average', color=color, linestyle='dashed')
     
-    plt.xlabel('log(Number of Cycles)')
+    plt.xlabel('log(# Cycles)')
     plt.ylabel('log($a-a_0$)')
-    plt.title('Multiple Linear Relationships')
+
     plt.grid(True)
     plt.legend()
     plt.show()
+
 
 # Example usage
 # List of tuples containing (m, c, color) values for each linear relationship
