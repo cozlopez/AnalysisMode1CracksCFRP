@@ -10,7 +10,7 @@ def plot_multiple_linear_relations(params_list, x_range=(100, 100000),y_range = 
     for m, c, color in params_list:
         i=i + 1
         # Calculate y values using the linear equation y = mx + c
-        y_values = 10**(m *np.log10( x_values )+ c)
+        y_values = 10**((m *np.log10( x_values )+ c))/1000
         # Plot the linear relationship with the specified color
         if i<6:
             ax.plot(x_values, y_values, label='User '+ str(i), color=color)
@@ -19,14 +19,17 @@ def plot_multiple_linear_relations(params_list, x_range=(100, 100000),y_range = 
         if i==7:
             ax.plot(x_values, y_values, label='Manual average', color=color, linestyle='dashed')
     
-    ax.set_xlabel('log(# Cycles)')
-    ax.set_ylabel('log($a-a_0$)')
+    ax.set_xlabel('# Cycles')
+    ax.set_ylabel('$a-a_0$[m]')
     ax.set_xscale('log', base=10)
     ax.set_yscale('log', base=10)
     
     
     
+    
     ax.grid(True)
+    ax.grid(True, which='both', linestyle=':', linewidth=0.5)
+   
     ax.legend()
     plt.show()
 
