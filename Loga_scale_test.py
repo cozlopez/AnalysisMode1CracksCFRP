@@ -10,7 +10,9 @@ import numpy as np
 
 # Generate some data
 x = np.linspace(1, 10, 100)
-y = np.log10(x)
+a = 2
+b=0
+y = a*np.log10(x)+b
 
 # Create a figure and an axes
 fig, ax = plt.subplots()
