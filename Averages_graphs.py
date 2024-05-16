@@ -1,28 +1,33 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_multiple_linear_relations(params_list, x_range=(2, 5),y_range = (0,1.2), num_points=100):
+def plot_multiple_linear_relations(params_list, x_range=(100, 100000),y_range = (0,1.2), num_points=100):
     # Generate x values within the specified range
+    fig,ax = plt.subplots()
     x_values = np.linspace(x_range[0], x_range[1], num_points)
     i = 0
     # Plot each linear relationship with a different color
     for m, c, color in params_list:
         i=i + 1
         # Calculate y values using the linear equation y = mx + c
-        y_values = m * x_values + c
+        y_values = 10**(m *np.log10( x_values )+ c)
         # Plot the linear relationship with the specified color
         if i<6:
-            plt.plot(x_values, y_values, label='User '+ str(i), color=color)
+            ax.plot(x_values, y_values, label='User '+ str(i), color=color)
         if i==6:
-            plt.plot(x_values, y_values, label='Hop method', color=color, linestyle='dashed')
+            ax.plot(x_values, y_values, label='Hop method', color=color, linestyle='dashed')
         if i==7:
-            plt.plot(x_values, y_values, label='Manual average', color=color, linestyle='dashed')
+            ax.plot(x_values, y_values, label='Manual average', color=color, linestyle='dashed')
     
-    plt.xlabel('log(# Cycles)')
-    plt.ylabel('log($a-a_0$)')
-
-    plt.grid(True)
-    plt.legend()
+    ax.set_xlabel('log(# Cycles)')
+    ax.set_ylabel('log($a-a_0$)')
+    ax.set_xscale('log', base=10)
+    ax.set_yscale('log', base=10)
+    
+    
+    
+    ax.grid(True)
+    ax.legend()
     plt.show()
 
 

@@ -12,7 +12,7 @@ import numpy as np
 x = np.linspace(1, 10, 100)
 a = 2
 b=0
-y = a*np.log10(x)+b
+y = 10**(a*np.log10(x)+b)
 
 # Create a figure and an axes
 fig, ax = plt.subplots()
@@ -22,7 +22,7 @@ ax.plot(x, y, label='exp(x)')
 
 # Set the scale of the x and y axes to logarithmic
 ax.set_xscale('log', base=10)
-
+ax.set_yscale('log', base=10)
 
 # Add labels, title, and legend
 ax.set_xlabel('x (log scale)')
